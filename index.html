@@ -9,6 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOS WOMAN — Você não está sozinha</title>
+    <meta name="description" content="SOS WOMAN é um espaço seguro e sigiloso para relatar violência, encontrar acolhimento e localizar serviços de apoio à mulher perto de você.">
+    <meta name="keywords" content="apoio à mulher, violência contra a mulher, denúncia anônima, acolhimento, DEAM, Casa da Mulher Brasileira, CRAS, rede de apoio, SOS Woman">
+    <meta name="author" content="SOS WOMAN">
 
     <!-- Tailwind CSS (layout responsivo) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -541,8 +544,8 @@
             <label for="texto-relato" class="fonte-recibo block text-[9px] sm:text-[10px] font-bold text-sos-marrom/55 mb-2">Seu relato, do seu jeito</label>
             <textarea id="texto-relato" rows="9" maxlength="4000" placeholder="Sinta-se à vontade para escrever o que aconteceu..." class="papel-caderno mb-6"></textarea>
 
-            <div id="feedback-relato" class="hidden mb-5 px-4 py-3 rounded-[4px] border border-dashed border-sos-marrom/30 bg-sos-papel-claro/60 text-sos-roxo text-xs font-medium">
-                Seu registro foi salvo com segurança apenas neste dispositivo. Você não está sozinha.
+            <div id="feedback-relato" class="hidden mb-5 px-4 py-3 rounded-[4px] border border-dashed border-sos-marrom/30 bg-sos-papel-claro/60 text-sos-roxo text-xs font-medium" role="status" aria-live="polite">
+                Você não está sozinha.
             </div>
 
             <div class="border-t border-dashed border-sos-marrom/25 pt-5 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">

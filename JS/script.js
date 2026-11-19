@@ -106,12 +106,43 @@ function closeRelatoModal() {
     modal.classList.remove('flex');
 }
 
-function salvarRelato() {
+async function salvarRelato() {
     const texto = document.getElementById('texto-relato').value.trim();
     const feedback = document.getElementById('feedback-relato');
-    if (texto.length > 0) {
+    const botao = document.querySelector('#modal-relato button[onclick="salvarRelato()"]');
+
+    if (!texto) {
+        feedback.textContent = 'Escreva seu relato antes de salvar.';
+        feedback.classList.remove('hidden');
+        return;
+    }
+
+    botao.disabled = true;
+    botao.classList.add('opacity-70', 'cursor-wait');
+    botao.textContent = 'Salvando...';
+
+    try {
+        const resposta = await fetch('/api/relatos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ texto })
+        });
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(resultado.erro || 'Não foi possível salvar o relato.');
+        }
+
+        feedback.textContent = 'Seu relato foi salvo com segurança. Você não está sozinha.';
         feedback.classList.remove('hidden');
         document.getElementById('texto-relato').value = '';
+    } catch (erro) {
+        feedback.textContent = erro.message || 'Não foi possível salvar o relato. Tente novamente.';
+        feedback.classList.remove('hidden');
+    } finally {
+        botao.disabled = false;
+        botao.classList.remove('opacity-70', 'cursor-wait');
+        botao.textContent = 'Guardar meu relato';
     }
 }
 
