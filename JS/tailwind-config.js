@@ -24,9 +24,10 @@ tailwind.config = {
                     'amarelo-claro': cor('amarelo-claro'),
                     laranja: cor('laranja'),
                     azul: cor('azul'),
+                    'azul-claro': cor('azul-claro'),
                     'azul-escuro': cor('azul-escuro'),
+                    bege: cor('bege'),
                     rosa: cor('rosa'),
-                    'rosa-suave': cor('rosa-suave'),
                     roxo: cor('roxo'),
 
                     /* Marrons e beges */
@@ -44,6 +45,7 @@ tailwind.config = {
 
                     /* Neutros */
                     creme: cor('creme'),
+                    'off-white': cor('off-white'),
                     'branco-quente': cor('branco-quente'),
                     escuro: cor('escuro'),
                     texto: cor('texto'),
@@ -56,9 +58,7 @@ tailwind.config = {
                     'card-rosa': cor('card-rosa'),
                     'card-azul': cor('card-azul'),
                     'card-amarelo': cor('card-amarelo'),
-                    lilas: cor('lilas'),
                     'lilas-forte': cor('lilas-forte'),
-                    'azul-claro': cor('azul-claro'),
                     pessego: cor('pessego'),
 
                     /* Rodapé */

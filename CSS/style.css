@@ -4,32 +4,31 @@
    0. Paleta de cores (o ÚNICO lugar onde a cor existe)
    1. Base do site + textura de papel
    2. Navegação e tipografia de recibo
-   3. Animação de entrada
-   4. Auras de aquarela (fundos que respiram)
-   5. Cards com efeito 3D
-   6. Papel amassado e folha de caderno
-   7. Acessibilidade
+   3. Cards com efeito 3D
+   4. Papel amassado e folha de caderno
+   5. Aquarela (só na seção "O primeiro passo")
+   6. Acessibilidade
    ========================================================================== */
 
 /* ---------- 0. PALETA (TOKENS DE COR) ----------
    Cada cor é guardada em CANAIS RGB ("R G B"), não em hexadecimal.
    Motivo: assim o Tailwind consegue aplicar transparência, por exemplo
-   bg-sos-uva/20  ->  rgb(118 53 43 / 0.2).
+   bg-sos-uva/20  ->  rgb(118 53 43 / 0.2). ? isso é marrom
 
    O comentário à direita mostra o hexadecimal original,
    para você achar a cor rapidinho.
    ------------------------------------------------------------------ */
 :root {
     /* --- Beges --- */
-    --sos-creme: 240 227 207;        /* #F0E3CF - cabeçalho e cartões claros (bege mais claro) */
-    --sos-perola: 250 246 238;       /* #FAF6EE - fundo do site (off white) */
+    --sos-creme: 231 208 179;        /* #E7D0B3 - cabeçalho (bege mais escuro) */
+    --sos-perola: 240 227 207;       /* #F0E3CF - fundo do site (bege mais claro) */
+    --sos-off-white: 255 245 238;     /*#FFF5EE */
     --sos-areia: 225 196 171;        /* #E1C4AB - reserva para fundos mais quentes */
     --sos-papel: 240 226 205;        /* papel amassado (bege claro) */
     --sos-papel-claro: 246 236 219;  /* folha de caderno */
 
     /* --- Rosa --- */
     --sos-rosa: 224 129 142;         /* #E0818E - hover, destaques, aquarela */
-    --sos-rosa-suave: 236 195 187;   /* rosa lavado */
 
     /* --- Marrons --- */
     --sos-marrom: 118 53 43;         /* #76352B - textos e botões principais */
@@ -38,18 +37,20 @@
 
     /* --- Amarelo --- */
     --sos-amarelo: 249 223 142;      /* #F9DF8E */
+    --sos-bege: 223 201 172;         /* #DFC9AC - letras sobre o roxo */
     --sos-amarelo-claro: 253 241 205;/* #FDF1CD - amarelo lavado */
 
-    /* --- Azul --- */
+    /* --- Azul (desfoque atrás do abraço e card da rede de apoio) --- */
     --sos-azul: 156 183 211;         /* #9CB7D3 */
-    --sos-azul-escuro: 41 51 69;     /* #293345 */
+    --sos-azul-claro: 214 227 240;   /* #D6E3F0 - card dos pontos de apoio */
+    --sos-azul-escuro: 41 51 69;   /* #293345 rgb( 41, 51, 69)*/
 
     /* --- Roxo --- */
     --sos-roxo: 104 68 83;           /* #684453 */
 
     /* --- Apelidos usados pelos nomes antigos do Tailwind/HTML --- */
     --sos-laranja: 224 129 142;      /* detalhes de destaque = rosa */
-    --sos-uva: 118 53 43;            /* cor principal de texto/links */
+    --sos-uva: 118 53 43;            /* cor principal de texto/links */ /*mas não é uva??? é marrom, mudança 118 53 43 */
     --sos-uva-escuro: 82 49 46;      /* hover */
 
     /* --- Neutros --- */
@@ -65,9 +66,7 @@
     --sos-card-rosa: 236 195 187;    /* card 01 */
     --sos-card-azul: 202 214 227;    /* card 02 */
     --sos-card-amarelo: 244 223 179; /* card 03 */
-    --sos-lilas: 104 68 83;          /* banner privacidade (roxo) */
     --sos-lilas-forte: 124 84 99;    /* forma interna */
-    --sos-azul-claro: 214 222 231;   /* lista da rede de apoio */
     --sos-pessego: 236 205 186;      /* chamada final */
 
     /* --- Rodapé (fundo escuro) --- */
@@ -76,38 +75,21 @@
     --sos-footer-fraco: 199 174 146;
 }
 
-/* ---------- 1. BASE + TEXTURA DE PAPEL ---------- */
-/* As auras passam das bordas das seções de propósito: nada de corte em linha reta.
-   "clip" (e não "hidden") evita barra de rolagem lateral SEM criar um
-   contêiner de rolagem próprio — é isso que impedia a rolagem dupla. */
+/* ---------- 1. BASE ---------- */
+/* "clip" (e não "hidden") evita barra de rolagem lateral SEM criar um
+   contêiner de rolagem próprio — é isso que impede a rolagem dupla. */
 html,
 body {
     overflow-x: clip;
 }
 
 body {
-    background-color: rgb(var(--sos-perola));
-    /* Lavagens bem leves de aquarela no fundo da página inteira */
-    background-image:
-        radial-gradient(120% 80% at 100% 0%, rgb(var(--sos-amarelo) / .12) 0%, rgb(var(--sos-amarelo) / 0) 55%),
-        radial-gradient(90% 70% at 0% 32%, rgb(var(--sos-rosa) / .09) 0%, rgb(var(--sos-rosa) / 0) 60%),
-        radial-gradient(90% 70% at 85% 82%, rgb(var(--sos-azul) / .1) 0%, rgb(var(--sos-azul) / 0) 62%);
+    /* Fundo sólido: um bege só. A única aquarela do site fica na seção
+       "O primeiro passo" (classes .aquarela-blob). */
+    background-color: rgb(var(--sos-off-white));
     color: rgb(var(--sos-texto));
     font-family: 'DM Sans', sans-serif;
     position: relative;
-}
-
-/* Grão de papel sobre o fundo (fica atrás do conteúdo, que usa z-10) */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: .18;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E");
-    background-size: 220px 220px;
 }
 
 ::selection {
@@ -122,18 +104,15 @@ body::after {
     display: inline-block;
     padding: .5rem 1rem;
     border-radius: 9999px;
-    color: rgb(var(--sos-marrom-escuro));
+    color: inherit;                 /* herda: creme no header, marrom no menu mobile */
     transition: background-color .35s ease, color .35s ease, transform .35s ease;
     white-space: nowrap;
 }
 .nav-link:hover,
 .nav-link:focus-visible {
     background-color: rgb(var(--sos-rosa) / .32);
-    color: rgb(var(--sos-marrom));
+    color: rgb(var(--sos-marrom-escuro));
     transform: translateY(-1px);
-}
-.nav-link-compacto {
-    padding: .3rem .55rem;
 }
 
 /* Letra de recibo: pequena, espaçada, de máquina de escrever */
@@ -143,102 +122,7 @@ body::after {
     text-transform: uppercase;
 }
 
-/* ---------- 3. ANIMAÇÃO DE ENTRADA (sobe e ganha cor) ---------- */
-.reveal-up {
-    opacity: 0.5;
-    filter: saturate(50%);
-    transform: translateY(34px);
-    transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
-                filter 1.1s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, filter, transform;
-}
-.reveal-up.is-visible {
-    opacity: 1;
-    filter: saturate(100%);
-    transform: translateY(0);
-}
-.delay-100 { transition-delay: 100ms; }
-.delay-200 { transition-delay: 200ms; }
-
-/* ---------- 4. AURAS DE AQUARELA ----------
-   Cada .aura-blob recebe:
-     - a COR    (aura-rosa, aura-amarelo, aura-azul)
-     - a FORÇA  (aura-leve, aura-suave, aura-media, aura-forte)
-     - a FORMA  (aura-forma-1..4, opcional)
-
-   Cada mancha é feita de TRÊS lavagens de cor em pontos diferentes,
-   borradas e multiplicadas sobre o papel. É isso que dá o encontro de
-   tintas da aquarela — sem virar faixa de sorvete.
-   ------------------------------------------------------------ */
-@keyframes auraA {
-    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-    25%  { transform: translate3d(130px, -100px, 0) scale(1.18) rotate(10deg); }
-    50%  { transform: translate3d(50px, 80px, 0) scale(.9) rotate(-6deg); }
-    75%  { transform: translate3d(-120px, 40px, 0) scale(1.1) rotate(-13deg); }
-    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-}
-@keyframes auraB {
-    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-    33%  { transform: translate3d(-120px, 85px, 0) scale(1.16) rotate(-12deg); }
-    66%  { transform: translate3d(95px, -60px, 0) scale(.92) rotate(9deg); }
-    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-}
-@keyframes auraC {
-    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-    30%  { transform: translate3d(95px, 100px, 0) scale(1.12) rotate(12deg); }
-    65%  { transform: translate3d(-105px, -60px, 0) scale(.9) rotate(-9deg); }
-    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-}
-@keyframes auraD {
-    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-    40%  { transform: translate3d(70px, -120px, 0) scale(1.2) rotate(14deg); }
-    75%  { transform: translate3d(-90px, 55px, 0) scale(.93) rotate(-8deg); }
-    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-}
-
-.aura-blob {
-    --aura: var(--sos-rosa);
-    --aura-2: var(--sos-amarelo);
-    --aura-3: var(--sos-azul);
-    --aura-alpha: .32;
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-    border-radius: 56% 44% 52% 48% / 46% 54% 46% 54%;
-    filter: blur(24px) saturate(115%);
-    mix-blend-mode: multiply;
-    background:
-        radial-gradient(58% 52% at 32% 34%, rgb(var(--aura) / var(--aura-alpha)) 0%, rgb(var(--aura) / 0) 70%),
-        radial-gradient(50% 54% at 70% 64%, rgb(var(--aura-2) / calc(var(--aura-alpha) * .8)) 0%, rgb(var(--aura-2) / 0) 72%),
-        radial-gradient(44% 40% at 52% 84%, rgb(var(--aura-3) / calc(var(--aura-alpha) * .6)) 0%, rgb(var(--aura-3) / 0) 70%);
-    animation: auraA 13s ease-in-out infinite;
-    will-change: transform;
-}
-
-/* Ritmos diferentes: nenhuma mancha anda no mesmo tempo que a outra */
-.aura-delay-1 { animation-name: auraB; animation-duration: 10s; animation-delay: -3s; }
-.aura-delay-2 { animation-name: auraC; animation-duration: 16s; animation-delay: -6s; }
-.aura-delay-3 { animation-name: auraD; animation-duration: 20s; animation-delay: -9s; }
-
-/* Formas orgânicas: a mancha nunca é um círculo perfeito */
-.aura-forma-1 { border-radius: 62% 38% 45% 55% / 52% 42% 58% 48%; }
-.aura-forma-2 { border-radius: 43% 57% 64% 36% / 39% 61% 39% 61%; }
-.aura-forma-3 { border-radius: 51% 49% 38% 62% / 63% 47% 53% 37%; }
-
-/* Encontro de cores de cada mancha */
-.aura-rosa    { --aura: var(--sos-rosa);    --aura-2: var(--sos-rosa-suave); --aura-3: var(--sos-amarelo); }
-.aura-amarelo { --aura: var(--sos-amarelo); --aura-2: var(--sos-rosa);       --aura-3: var(--sos-azul); }
-.aura-azul    { --aura: var(--sos-azul);    --aura-2: var(--sos-rosa);       --aura-3: var(--sos-amarelo); }
-
-
-/* Intensidade da aquarela (tinta no centro da mancha) */
-.aura-leve  { --aura-alpha: .18; }
-.aura-suave { --aura-alpha: .26; }
-.aura-media { --aura-alpha: .34; }
-.aura-forte { --aura-alpha: .46; }
-
-/* ---------- 5. CARDS COM EFEITO 3D ---------- */
+/* ---------- 3. CARDS COM EFEITO 3D ---------- */
 .card-3d-wrapper {
     perspective: 1100px;
 }
@@ -250,23 +134,7 @@ body::after {
     box-shadow: 0 22px 44px -15px rgb(var(--sos-marrom-escuro) / 0.22);
 }
 
-/* ---------- 6. PAPEL AMASSADO E FOLHA DE CADERNO ---------- */
-
-/* Fita de papel prendendo o bilhete */
-.fita-papel {
-    position: absolute;
-    top: 7px;
-    left: 50%;
-    width: 118px;
-    height: 24px;
-    transform: translateX(-50%) rotate(-2.5deg);
-    background: linear-gradient(180deg, rgb(var(--sos-rosa) / .40), rgb(var(--sos-rosa) / .24));
-    border-left: 1px dashed rgb(255 255 255 / .55);
-    border-right: 1px dashed rgb(255 255 255 / .55);
-    box-shadow: 0 2px 6px rgb(var(--sos-marrom-escuro) / .14);
-    pointer-events: none;
-    z-index: 20;
-}
+/* ---------- 4. PAPEL AMASSADO E FOLHA DE CADERNO ---------- */
 
 /* Folha amassada: dobras, sombras de vinco e luz de papel */
 .papel-amassado {
@@ -318,7 +186,7 @@ body::after {
     background-color: rgb(var(--sos-papel-claro));
     background-image:
         linear-gradient(90deg, transparent 0 48px, rgb(var(--sos-rosa) / .5) 48px 49.5px, transparent 49.5px),
-        repeating-linear-gradient(180deg, rgb(var(--sos-azul-escuro) / 0) 0 33px, rgb(var(--sos-azul-escuro) / .13) 33px 34px);
+        repeating-linear-gradient(180deg, rgb(var(--sos-roxo) / 0) 0 33px, rgb(var(--sos-roxo) / .13) 33px 34px);
     box-shadow:
         0 14px 30px -22px rgb(var(--sos-marrom-escuro) / .8),
         0 1px 0 rgb(255 255 255 / .6) inset;
@@ -343,13 +211,46 @@ body::after {
         padding: 6px 16px 18px 52px;
         background-image:
             linear-gradient(90deg, transparent 0 38px, rgb(var(--sos-rosa) / .5) 38px 39.5px, transparent 39.5px),
-            repeating-linear-gradient(180deg, rgb(var(--sos-azul-escuro) / 0) 0 33px, rgb(var(--sos-azul-escuro) / .13) 33px 34px);
+            repeating-linear-gradient(180deg, rgb(var(--sos-roxo) / 0) 0 33px, rgb(var(--sos-roxo) / .13) 33px 34px);
     }
 }
 
-/* ---------- 7. ACESSIBILIDADE ----------
+/* ---------- 5. AQUARELA (apenas na seção "O primeiro passo") ----------
+   Manchas de aquarela desfocadas: a única parte do site que volta a ter
+   textura colorida por cima do bege sólido. */
+.aquarela-blob {
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .55;
+    pointer-events: none;
+}
+.aquarela-blob--rosa {
+    width: 460px; height: 340px;
+    left: -120px; top: -130px;
+    background: radial-gradient(circle at 42% 45%, rgb(var(--sos-rosa) / .9), rgb(var(--sos-rosa) / 0) 70%);
+}
+.aquarela-blob--amarelo {
+    width: 520px; height: 380px;
+    right: -130px; bottom: -160px;
+    background: radial-gradient(circle at 55% 50%, rgb(var(--sos-amarelo) / .95), rgb(var(--sos-amarelo) / 0) 70%);
+}
+.aquarela-blob--azul {
+    width: 380px; height: 300px;
+    left: 46%; top: -110px;
+    background: radial-gradient(circle at 50% 50%, rgb(var(--sos-azul) / .85), rgb(var(--sos-azul) / 0) 70%);
+}
+
+@media (max-width: 640px) {
+    .aquarela-blob { filter: blur(56px); opacity: .5; }
+    .aquarela-blob--rosa { width: 300px; height: 220px; left: -100px; }
+    .aquarela-blob--amarelo { width: 340px; height: 250px; right: -110px; }
+    .aquarela-blob--azul { width: 250px; height: 200px; left: 35%; }
+}
+
+/* ---------- 6. ACESSIBILIDADE ----------
    Quem pediu "reduzir movimento" no celular/computador não vê as animações. */
 @media (prefers-reduced-motion: reduce) {
-    .aura-blob { animation: none; }
-    .reveal-up { transition: none; opacity: 1; filter: none; transform: none; }
+    .card-3d { transition: none; }
 }
