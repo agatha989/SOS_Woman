@@ -1,11 +1,20 @@
 // 1. ANIMAÇÃO DE REVELAÇÃO AO ABRIR E ROLAR (SUBINDO E INDO DE 50% A 100% DE COR)
 document.addEventListener('DOMContentLoaded', () => {
-    const revealElements = document.querySelectorAll('.reveal-up');
+    // 1. REVELAÇÃO AO ROLAR + CASCATA: irmãos que entram juntos sobem em sequência
+    const revealElements = Array.from(document.querySelectorAll('.reveal-up'));
+
+    revealElements.forEach(el => {
+        const irmaos = Array.from(el.parentElement.children).filter(filho => filho.classList.contains('reveal-up'));
+        if (irmaos.length > 1) {
+            el.style.transitionDelay = `${irmaos.indexOf(el) * 110}ms`;
+        }
+    });
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
             }
         });
     }, {
@@ -38,6 +47,44 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = 'translateY(0px) rotateX(0deg) rotateY(0deg)';
         });
     });
+
+    // 1.1. PARALLAX: cada aura caminha no seu ritmo conforme a rolagem da página
+    const auras = Array.from(document.querySelectorAll('.aura-blob'));
+    const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (auras.length && !semMovimento) {
+        const ritmos = auras.map((_, indice) => {
+            const passo = ((indice % 5) + 1) * 0.05; // de 0.05 até 0.25
+            return indice % 2 === 0 ? passo : -passo;
+        });
+        let pedido = false;
+
+        const moverAuras = () => {
+            const metadeDaTela = window.innerHeight / 2;
+            const caixas = new Map();
+
+            auras.forEach((aura, indice) => {
+                const secao = aura.closest('section') || aura.parentElement;
+                if (!caixas.has(secao)) caixas.set(secao, secao.getBoundingClientRect());
+                const caixa = caixas.get(secao);
+                const distancia = (caixa.top + caixa.height / 2 - metadeDaTela) / window.innerHeight;
+                const deslocamento = Math.max(-85, Math.min(85, -distancia * 260 * ritmos[indice]));
+                aura.style.translate = `0 ${deslocamento.toFixed(2)}px`;
+            });
+
+            pedido = false;
+        };
+
+        const agendar = () => {
+            if (pedido) return;
+            pedido = true;
+            requestAnimationFrame(moverAuras);
+        };
+
+        window.addEventListener('scroll', agendar, { passive: true });
+        window.addEventListener('resize', agendar);
+        moverAuras();
+    }
 });
 
 // 3. FUNÇÃO DE SAÍDA RÁPIDA (REDIRECIONAMENTO IMEDIATO PARA PÁGINA NEUTRA)
@@ -47,6 +94,7 @@ function quickExit() {
 
 // 4. CONTROLE DO MODAL DE RELATO
 function openRelatoModal() {
+    document.getElementById('feedback-relato').classList.add('hidden');
     const modal = document.getElementById('modal-relato');
     modal.classList.remove('hidden');
     modal.classList.add('flex');
@@ -184,7 +232,6 @@ function criarPontosGoogle(localizacao) {
     ];
 
     return categorias.map(categoria => ({
-        encontrado: true,
         nome: categoria.titulo,
         descricao: categoria.descricao,
         icone: categoria.icone,
@@ -206,9 +253,7 @@ const ICONES_PONTO = {
 };
 
 function mostrarAreaApoio() {
-    const area = document.getElementById('area-apoio');
-    area.classList.remove('hidden');
-    requestAnimationFrame(() => area.classList.add('is-visible'));
+    document.getElementById('area-apoio').classList.remove('hidden');
 }
 
 function renderizarPontos(pontos) {

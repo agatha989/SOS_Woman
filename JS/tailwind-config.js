@@ -21,15 +21,26 @@ tailwind.config = {
                 sos: {
                     /* Cores da marca */
                     amarelo: cor('amarelo'),
+                    'amarelo-claro': cor('amarelo-claro'),
                     laranja: cor('laranja'),
                     azul: cor('azul'),
+                    'azul-escuro': cor('azul-escuro'),
                     rosa: cor('rosa'),
+                    'rosa-suave': cor('rosa-suave'),
                     roxo: cor('roxo'),
+
+                    /* Marrons e beges */
+                    marrom: cor('marrom'),
+                    'marrom-medio': cor('marrom-medio'),
+                    'marrom-escuro': cor('marrom-escuro'),
+                    areia: cor('areia'),
+                    perola: cor('perola'),
+                    papel: cor('papel'),
+                    'papel-claro': cor('papel-claro'),
 
                     /* Roxo principal de texto, links e botões */
                     uva: cor('uva'),
                     'uva-escuro': cor('uva-escuro'),
-                    'roxo-medio': cor('roxo-medio'),
 
                     /* Neutros */
                     creme: cor('creme'),
@@ -41,7 +52,6 @@ tailwind.config = {
                     'input-borda': cor('input-borda'),
 
                     /* Fundos suaves das seções */
-                    faixa: cor('faixa'),
                     chip: cor('chip'),
                     'card-rosa': cor('card-rosa'),
                     'card-azul': cor('card-azul'),
@@ -49,9 +59,7 @@ tailwind.config = {
                     lilas: cor('lilas'),
                     'lilas-forte': cor('lilas-forte'),
                     'azul-claro': cor('azul-claro'),
-                    'azul-banner': cor('azul-banner'),
                     pessego: cor('pessego'),
-                    modal: cor('modal'),
 
                     /* Rodapé */
                     'divisor-escuro': cor('divisor-escuro'),

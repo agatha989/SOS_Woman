@@ -2,73 +2,148 @@
    ESTILOS DO SOS WOMAN
    Ordem do arquivo:
    0. Paleta de cores (o ÚNICO lugar onde a cor existe)
-   1. Base do site
-   2. Animação de entrada
-   3. Auras (manchas de cor do fundo)
-   4. Ondas do mar
+   1. Base do site + textura de papel
+   2. Navegação e tipografia de recibo
+   3. Animação de entrada
+   4. Auras de aquarela (fundos que respiram)
    5. Cards com efeito 3D
-   6. Acessibilidade
+   6. Papel amassado e folha de caderno
+   7. Acessibilidade
    ========================================================================== */
 
 /* ---------- 0. PALETA (TOKENS DE COR) ----------
    Cada cor é guardada em CANAIS RGB ("R G B"), não em hexadecimal.
    Motivo: assim o Tailwind consegue aplicar transparência, por exemplo
-   bg-sos-uva/20  ->  rgb(120 63 112 / 0.2).
+   bg-sos-uva/20  ->  rgb(118 53 43 / 0.2).
 
-   O comentário à direita mostra o hexadecimal original do Figma,
+   O comentário à direita mostra o hexadecimal original,
    para você achar a cor rapidinho.
    ------------------------------------------------------------------ */
 :root {
-    /* Cores principais da marca */
-    --sos-amarelo: 246 189 96;   /* #F6BD60 */
-    --sos-laranja: 253 129 57;   /* #FD8139 */
-    --sos-azul: 148 176 218;     /* #94B0DA */
-    --sos-rosa: 246 148 193;     /* #F694C1 */
-    --sos-roxo: 179 76 156;      /* #B34C9C */
+    /* --- Beges --- */
+    --sos-creme: 240 227 207;        /* #F0E3CF - cabeçalho e cartões claros (bege mais claro) */
+    --sos-perola: 250 246 238;       /* #FAF6EE - fundo do site (off white) */
+    --sos-areia: 225 196 171;        /* #E1C4AB - reserva para fundos mais quentes */
+    --sos-papel: 240 226 205;        /* papel amassado (bege claro) */
+    --sos-papel-claro: 246 236 219;  /* folha de caderno */
 
-    /* Roxo escuro: é a cor de texto/links/botões principal do Figma */
-    --sos-uva: 120 63 112;       /* #783F70 */
-    --sos-uva-escuro: 99 50 92;  /* #63325C (usado no hover) */
-    --sos-roxo-medio: 153 61 132;/* #993D84 (hover do modal) */
+    /* --- Rosa --- */
+    --sos-rosa: 224 129 142;         /* #E0818E - hover, destaques, aquarela */
+    --sos-rosa-suave: 236 195 187;   /* rosa lavado */
 
-    /* Neutros */
-    --sos-creme: 255 249 241;       /* #FFF9F1 - fundo do site */
-    --sos-branco-quente: 255 253 252;/* #FFFDFC - cartões claros */
-    --sos-escuro: 56 40 60;         /* #38283C - títulos */
-    --sos-texto: 113 101 116;       /* #716574 - parágrafos */
-    --sos-borda: 197 173 190;       /* #C5ADBE */
-    --sos-divisor: 223 212 221;     /* #DFD4DD */
-    --sos-input-borda: 221 209 220; /* #DDD1DC */
+    /* --- Marrons --- */
+    --sos-marrom: 118 53 43;         /* #76352B - textos e botões principais */
+    --sos-marrom-medio: 82 49 46;    /* #52312E - parágrafos */
+    --sos-marrom-escuro: 57 40 44;   /* #39282C - títulos e rodapé */
 
-    /* Fundos suaves das seções */
-    --sos-faixa: 242 234 239;       /* #F2EAEF - faixa de pilares */
-    --sos-chip: 244 232 236;        /* #F4E8EC - selo "acolhimento" */
-    --sos-card-rosa: 244 226 236;   /* #F4E2EC - card 01 */
-    --sos-card-azul: 227 234 244;   /* #E3EAF4 - card 02 */
-    --sos-card-amarelo: 250 232 203;/* #FAE8CB - card 03 */
-    --sos-lilas: 238 231 240;       /* #EEE7F0 - banner privacidade */
-    --sos-lilas-forte: 222 215 235; /* #DED7EB - forma interna */
-    --sos-azul-claro: 233 237 245;  /* #E9EDF5 - lista da rede de apoio */
-    --sos-azul-banner: 225 232 241; /* #E1E8F1 - banner saída rápida */
-    --sos-pessego: 249 233 220;     /* #F9E9DC - chamada final */
-    --sos-modal: 250 247 245;       /* #FAF7F5 - fundo do modal */
+    /* --- Amarelo --- */
+    --sos-amarelo: 249 223 142;      /* #F9DF8E */
+    --sos-amarelo-claro: 253 241 205;/* #FDF1CD - amarelo lavado */
 
-    /* Rodapé (fundo escuro) */
-    --sos-divisor-escuro: 99 80 103;/* #635067 */
-    --sos-footer-texto: 227 214 227;/* #E3D6E3 */
-    --sos-footer-fraco: 216 202 217;/* #D8CAD9 */
+    /* --- Azul --- */
+    --sos-azul: 156 183 211;         /* #9CB7D3 */
+    --sos-azul-escuro: 41 51 69;     /* #293345 */
+
+    /* --- Roxo --- */
+    --sos-roxo: 104 68 83;           /* #684453 */
+
+    /* --- Apelidos usados pelos nomes antigos do Tailwind/HTML --- */
+    --sos-laranja: 224 129 142;      /* detalhes de destaque = rosa */
+    --sos-uva: 118 53 43;            /* cor principal de texto/links */
+    --sos-uva-escuro: 82 49 46;      /* hover */
+
+    /* --- Neutros --- */
+    --sos-branco-quente: 246 236 219;/* papel dos cartões */
+    --sos-escuro: 57 40 44;          /* títulos */
+    --sos-texto: 82 49 46;           /* parágrafos */
+    --sos-borda: 188 161 132;        /* bordas */
+    --sos-divisor: 199 174 146;      /* divisórias */
+    --sos-input-borda: 199 174 146;  /* borda dos campos */
+
+    /* --- Fundos suaves das seções --- */
+    --sos-chip: 234 205 186;         /* selo "acolhimento" */
+    --sos-card-rosa: 236 195 187;    /* card 01 */
+    --sos-card-azul: 202 214 227;    /* card 02 */
+    --sos-card-amarelo: 244 223 179; /* card 03 */
+    --sos-lilas: 104 68 83;          /* banner privacidade (roxo) */
+    --sos-lilas-forte: 124 84 99;    /* forma interna */
+    --sos-azul-claro: 214 222 231;   /* lista da rede de apoio */
+    --sos-pessego: 236 205 186;      /* chamada final */
+
+    /* --- Rodapé (fundo escuro) --- */
+    --sos-divisor-escuro: 92 70 66;
+    --sos-footer-texto: 231 208 179;
+    --sos-footer-fraco: 199 174 146;
 }
 
-/* ---------- 1. BASE ---------- */
+/* ---------- 1. BASE + TEXTURA DE PAPEL ---------- */
+/* As auras passam das bordas das seções de propósito: nada de corte em linha reta.
+   "clip" (e não "hidden") evita barra de rolagem lateral SEM criar um
+   contêiner de rolagem próprio — é isso que impedia a rolagem dupla. */
+html,
 body {
-    background-color: rgb(var(--sos-creme));
+    overflow-x: clip;
+}
+
+body {
+    background-color: rgb(var(--sos-perola));
+    /* Lavagens bem leves de aquarela no fundo da página inteira */
+    background-image:
+        radial-gradient(120% 80% at 100% 0%, rgb(var(--sos-amarelo) / .12) 0%, rgb(var(--sos-amarelo) / 0) 55%),
+        radial-gradient(90% 70% at 0% 32%, rgb(var(--sos-rosa) / .09) 0%, rgb(var(--sos-rosa) / 0) 60%),
+        radial-gradient(90% 70% at 85% 82%, rgb(var(--sos-azul) / .1) 0%, rgb(var(--sos-azul) / 0) 62%);
     color: rgb(var(--sos-texto));
     font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
     position: relative;
 }
 
-/* ---------- 2. ANIMAÇÃO DE ENTRADA (sobe e ganha cor) ---------- */
+/* Grão de papel sobre o fundo (fica atrás do conteúdo, que usa z-10) */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: .18;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+}
+
+::selection {
+    background: rgb(var(--sos-rosa) / .35);
+    color: rgb(var(--sos-marrom-escuro));
+}
+
+/* ---------- 2. NAVEGAÇÃO E TIPOGRAFIA DE RECIBO ---------- */
+
+/* Links do cabeçalho: viram pílulas com um leve tom rosado no hover */
+.nav-link {
+    display: inline-block;
+    padding: .5rem 1rem;
+    border-radius: 9999px;
+    color: rgb(var(--sos-marrom-escuro));
+    transition: background-color .35s ease, color .35s ease, transform .35s ease;
+    white-space: nowrap;
+}
+.nav-link:hover,
+.nav-link:focus-visible {
+    background-color: rgb(var(--sos-rosa) / .32);
+    color: rgb(var(--sos-marrom));
+    transform: translateY(-1px);
+}
+.nav-link-compacto {
+    padding: .3rem .55rem;
+}
+
+/* Letra de recibo: pequena, espaçada, de máquina de escrever */
+.fonte-recibo {
+    font-family: ui-monospace, 'SFMono-Regular', 'Courier New', monospace;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+/* ---------- 3. ANIMAÇÃO DE ENTRADA (sobe e ganha cor) ---------- */
 .reveal-up {
     opacity: 0.5;
     filter: saturate(50%);
@@ -86,98 +161,82 @@ body {
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
 
-/* ---------- 3. AURAS (manchas de cor que flutuam) ----------
-   Como funciona: cada div .aura-blob recebe duas classes extras:
-     - a COR    (aura-rosa, aura-amarelo, aura-azul, aura-laranja, aura-roxo)
+/* ---------- 4. AURAS DE AQUARELA ----------
+   Cada .aura-blob recebe:
+     - a COR    (aura-rosa, aura-amarelo, aura-azul)
      - a FORÇA  (aura-leve, aura-suave, aura-media, aura-forte)
+     - a FORMA  (aura-forma-1..4, opcional)
 
-   Essas classes só trocam as variáveis --aura e --aura-alpha,
-   e o gradiente abaixo usa essas variáveis. Por isso não precisamos
-   mais escrever gradiente em style="" no HTML.
+   Cada mancha é feita de TRÊS lavagens de cor em pontos diferentes,
+   borradas e multiplicadas sobre o papel. É isso que dá o encontro de
+   tintas da aquarela — sem virar faixa de sorvete.
    ------------------------------------------------------------ */
 @keyframes auraA {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33%      { transform: translate(85px, -60px) scale(1.08); }
-    66%      { transform: translate(-50px, 55px) scale(0.96); }
+    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+    25%  { transform: translate3d(130px, -100px, 0) scale(1.18) rotate(10deg); }
+    50%  { transform: translate3d(50px, 80px, 0) scale(.9) rotate(-6deg); }
+    75%  { transform: translate3d(-120px, 40px, 0) scale(1.1) rotate(-13deg); }
+    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
 }
 @keyframes auraB {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50%      { transform: translate(-95px, 65px) scale(1.1); }
+    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+    33%  { transform: translate3d(-120px, 85px, 0) scale(1.16) rotate(-12deg); }
+    66%  { transform: translate3d(95px, -60px, 0) scale(.92) rotate(9deg); }
+    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
 }
 @keyframes auraC {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    40%      { transform: translate(70px, 75px) scale(1.06); }
-    75%      { transform: translate(-65px, -45px) scale(0.95); }
+    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+    30%  { transform: translate3d(95px, 100px, 0) scale(1.12) rotate(12deg); }
+    65%  { transform: translate3d(-105px, -60px, 0) scale(.9) rotate(-9deg); }
+    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+}
+@keyframes auraD {
+    0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+    40%  { transform: translate3d(70px, -120px, 0) scale(1.2) rotate(14deg); }
+    75%  { transform: translate3d(-90px, 55px, 0) scale(.93) rotate(-8deg); }
+    100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
 }
 
 .aura-blob {
     --aura: var(--sos-rosa);
-    --aura-alpha: 0.25;
+    --aura-2: var(--sos-amarelo);
+    --aura-3: var(--sos-azul);
+    --aura-alpha: .32;
     position: absolute;
-    border-radius: 9999px;
     pointer-events: none;
     z-index: 0;
-    background: radial-gradient(50% 50% at 50% 50%,
-                rgb(var(--aura) / var(--aura-alpha)) 0%,
-                rgb(var(--aura) / 0) 100%);
-    animation: auraA 20s ease-in-out infinite;
-    will-change: transform;
-}
-.aura-delay-1 { animation-name: auraB; animation-duration: 15s; animation-delay: -6s; }
-.aura-delay-2 { animation-name: auraC; animation-duration: 18s; animation-delay: -12s; }
-
-/* Cor da aura */
-.aura-rosa    { --aura: var(--sos-rosa); }
-.aura-amarelo { --aura: var(--sos-amarelo); }
-.aura-azul    { --aura: var(--sos-azul); }
-.aura-laranja { --aura: var(--sos-laranja); }
-.aura-roxo    { --aura: var(--sos-roxo); }
-
-/* Intensidade da aura (quanto de opacidade no centro) */
-.aura-leve  { --aura-alpha: 0.15; }
-.aura-suave { --aura-alpha: 0.25; }
-.aura-media { --aura-alpha: 0.4; }
-.aura-forte { --aura-alpha: 0.6; }
-
-/* ---------- 4. ONDAS DO MAR (linhas do fundo) ----------
-   Cada linha tem dois movimentos:
-   - desliza para o lado (onda-X)
-   - sobe e desce de leve (onda-Y) */
-@keyframes ondaX {
-    from { transform: translateX(0); }
-    to   { transform: translateX(var(--anda)); }
-}
-@keyframes ondaY {
-    from { transform: translateY(-14px); }
-    to   { transform: translateY(14px); }
-}
-
-.onda {
-    animation-name: ondaX;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    will-change: transform;
-}
-.onda-vai-e-vem {
-    animation-name: ondaY;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+    border-radius: 56% 44% 52% 48% / 46% 54% 46% 54%;
+    filter: blur(24px) saturate(115%);
+    mix-blend-mode: multiply;
+    background:
+        radial-gradient(58% 52% at 32% 34%, rgb(var(--aura) / var(--aura-alpha)) 0%, rgb(var(--aura) / 0) 70%),
+        radial-gradient(50% 54% at 70% 64%, rgb(var(--aura-2) / calc(var(--aura-alpha) * .8)) 0%, rgb(var(--aura-2) / 0) 72%),
+        radial-gradient(44% 40% at 52% 84%, rgb(var(--aura-3) / calc(var(--aura-alpha) * .6)) 0%, rgb(var(--aura-3) / 0) 70%);
+    animation: auraA 13s ease-in-out infinite;
     will-change: transform;
 }
 
-/* Ondas com deslocamento mais rápido e balanço vertical mais evidente */
-.onda-1 { --anda: 720px; animation-duration: 16s; }
-.onda-vai-e-vem-1 { animation-duration: 7s; animation-delay: -2s; }
+/* Ritmos diferentes: nenhuma mancha anda no mesmo tempo que a outra */
+.aura-delay-1 { animation-name: auraB; animation-duration: 10s; animation-delay: -3s; }
+.aura-delay-2 { animation-name: auraC; animation-duration: 16s; animation-delay: -6s; }
+.aura-delay-3 { animation-name: auraD; animation-duration: 20s; animation-delay: -9s; }
 
-.onda-2 { --anda: -960px; animation-duration: 15s; }
-.onda-vai-e-vem-2 { animation-duration: 6s; animation-delay: -4s; }
+/* Formas orgânicas: a mancha nunca é um círculo perfeito */
+.aura-forma-1 { border-radius: 62% 38% 45% 55% / 52% 42% 58% 48%; }
+.aura-forma-2 { border-radius: 43% 57% 64% 36% / 39% 61% 39% 61%; }
+.aura-forma-3 { border-radius: 51% 49% 38% 62% / 63% 47% 53% 37%; }
 
-.onda-3 { --anda: 840px; animation-duration: 15s; }
-.onda-vai-e-vem-3 { animation-duration: 6s; animation-delay: -6s; }
+/* Encontro de cores de cada mancha */
+.aura-rosa    { --aura: var(--sos-rosa);    --aura-2: var(--sos-rosa-suave); --aura-3: var(--sos-amarelo); }
+.aura-amarelo { --aura: var(--sos-amarelo); --aura-2: var(--sos-rosa);       --aura-3: var(--sos-azul); }
+.aura-azul    { --aura: var(--sos-azul);    --aura-2: var(--sos-rosa);       --aura-3: var(--sos-amarelo); }
 
-.onda-4 { --anda: -600px; animation-duration: 16s; }
-.onda-vai-e-vem-4 { animation-duration: 7s; animation-delay: -8s; }
+
+/* Intensidade da aquarela (tinta no centro da mancha) */
+.aura-leve  { --aura-alpha: .18; }
+.aura-suave { --aura-alpha: .26; }
+.aura-media { --aura-alpha: .34; }
+.aura-forte { --aura-alpha: .46; }
 
 /* ---------- 5. CARDS COM EFEITO 3D ---------- */
 .card-3d-wrapper {
@@ -188,12 +247,109 @@ body {
     transform-style: preserve-3d;
 }
 .card-3d:hover {
-    box-shadow: 0 22px 44px -15px rgb(var(--sos-escuro) / 0.14);
+    box-shadow: 0 22px 44px -15px rgb(var(--sos-marrom-escuro) / 0.22);
 }
 
-/* ---------- 6. ACESSIBILIDADE ----------
+/* ---------- 6. PAPEL AMASSADO E FOLHA DE CADERNO ---------- */
+
+/* Fita de papel prendendo o bilhete */
+.fita-papel {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 118px;
+    height: 24px;
+    transform: translateX(-50%) rotate(-2.5deg);
+    background: linear-gradient(180deg, rgb(var(--sos-rosa) / .40), rgb(var(--sos-rosa) / .24));
+    border-left: 1px dashed rgb(255 255 255 / .55);
+    border-right: 1px dashed rgb(255 255 255 / .55);
+    box-shadow: 0 2px 6px rgb(var(--sos-marrom-escuro) / .14);
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* Folha amassada: dobras, sombras de vinco e luz de papel */
+.papel-amassado {
+    position: relative;
+    isolation: isolate;
+    background-color: rgb(var(--sos-papel));
+    background-image:
+        linear-gradient(101deg, transparent 0 38%, rgb(var(--sos-marrom) / .055) 39.2%, transparent 40.8%),
+        linear-gradient(-76deg, transparent 0 57%, rgb(var(--sos-marrom) / .05) 58.4%, transparent 60.2%),
+        linear-gradient(84deg, transparent 0 68%, rgb(var(--sos-marrom) / .042) 69.4%, transparent 71.2%),
+        linear-gradient(12deg, transparent 0 44%, rgb(var(--sos-marrom) / .038) 45.4%, transparent 47.2%),
+        linear-gradient(-58deg, transparent 0 22%, rgb(var(--sos-marrom) / .032) 23.4%, transparent 25.2%),
+        radial-gradient(125% 85% at 12% 2%, rgb(255 250 240 / .9) 0%, rgb(255 250 240 / 0) 56%),
+        radial-gradient(95% 80% at 94% 98%, rgb(var(--sos-marrom) / .14) 0%, rgb(var(--sos-marrom) / 0) 64%),
+        radial-gradient(70% 55% at 80% 16%, rgb(var(--sos-amarelo) / .2) 0%, rgb(var(--sos-amarelo) / 0) 70%);
+    box-shadow:
+        0 34px 70px -30px rgb(var(--sos-marrom-escuro) / .6),
+        0 2px 0 rgb(255 255 255 / .35) inset,
+        0 -2px 0 rgb(var(--sos-marrom) / .07) inset;
+}
+
+/* Grão do papel por cima do fundo, atrás do texto */
+.papel-amassado::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: .3;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23p)' opacity='0.55'/%3E%3C/svg%3E");
+    background-size: 240px 240px;
+}
+
+/* Folha de caderno: pauta azul + margem rosa + letra à mão */
+.papel-caderno {
+    display: block;
+    width: 100%;
+    min-height: 300px;
+    padding: 6px 22px 20px 62px;
+    border: 1px solid rgb(var(--sos-marrom) / .12);
+    border-radius: 3px 12px 4px 9px;
+    color: rgb(var(--sos-marrom-medio));
+    font-family: 'Caveat', 'Bradley Hand', 'Segoe Print', cursive;
+    font-size: 27px;
+    line-height: 34px;
+    letter-spacing: .2px;
+    background-color: rgb(var(--sos-papel-claro));
+    background-image:
+        linear-gradient(90deg, transparent 0 48px, rgb(var(--sos-rosa) / .5) 48px 49.5px, transparent 49.5px),
+        repeating-linear-gradient(180deg, rgb(var(--sos-azul-escuro) / 0) 0 33px, rgb(var(--sos-azul-escuro) / .13) 33px 34px);
+    box-shadow:
+        0 14px 30px -22px rgb(var(--sos-marrom-escuro) / .8),
+        0 1px 0 rgb(255 255 255 / .6) inset;
+    outline: none;
+    resize: vertical;
+    transition: box-shadow .3s ease, border-color .3s ease;
+}
+.papel-caderno::placeholder {
+    color: rgb(var(--sos-marrom) / .42);
+    font-family: inherit;
+}
+.papel-caderno:focus {
+    border-color: rgb(var(--sos-rosa) / .55);
+    box-shadow:
+        0 0 0 4px rgb(var(--sos-rosa) / .16),
+        0 14px 30px -22px rgb(var(--sos-marrom-escuro) / .8);
+}
+
+@media (max-width: 640px) {
+    .papel-caderno {
+        font-size: 23px;
+        padding: 6px 16px 18px 52px;
+        background-image:
+            linear-gradient(90deg, transparent 0 38px, rgb(var(--sos-rosa) / .5) 38px 39.5px, transparent 39.5px),
+            repeating-linear-gradient(180deg, rgb(var(--sos-azul-escuro) / 0) 0 33px, rgb(var(--sos-azul-escuro) / .13) 33px 34px);
+    }
+}
+
+/* ---------- 7. ACESSIBILIDADE ----------
    Quem pediu "reduzir movimento" no celular/computador não vê as animações. */
 @media (prefers-reduced-motion: reduce) {
-    .aura-blob, .onda, .onda-vai-e-vem { animation: none; }
+    .aura-blob { animation: none; }
     .reveal-up { transition: none; opacity: 1; filter: none; transform: none; }
 }
