@@ -10,69 +10,58 @@
    6. Acessibilidade
    ========================================================================== */
 
-/* ---------- 0. PALETA (TOKENS DE COR) ----------
-   Cada cor é guardada em CANAIS RGB ("R G B"), não em hexadecimal.
-   Motivo: assim o Tailwind consegue aplicar transparência, por exemplo
-   bg-sos-uva/20  ->  rgb(118 53 43 / 0.2). ? isso é marrom
-
-   O comentário à direita mostra o hexadecimal original,
-   para você achar a cor rapidinho.
-   ------------------------------------------------------------------ */
+/* ---------- 0. PALETA (TOKENS DE COR — OPÇÃO A: REFINAMENTO EDITORIAL) ---------- */
 :root {
-    /* --- Beges --- */
-    --sos-creme: 231 208 179;        /* #E7D0B3 - cabeçalho (bege mais escuro) */
-    --sos-perola: 240 227 207;       /* #F0E3CF - fundo do site (bege mais claro) */
-    --sos-off-white: 255 245 238;     /*#FFF5EE */
-    --sos-areia: 225 196 171;        /* #E1C4AB - reserva para fundos mais quentes */
-    --sos-papel: 240 226 205;        /* papel amassado (bege claro) */
-    --sos-papel-claro: 246 236 219;  /* folha de caderno */
+    /* --- Beges e Papéis --- */
+    --sos-creme: 231 208 179;          /* #E7D0B3 - creme da logo e textos sobre fundos escuros */
+    --sos-off-white: 250 243 235;      /* #FAF3EB - fundo principal do site (linho quente) */
+    --sos-perola: 242 230 216;         /* #F2E6D8 - superfícies suaves */
+    --sos-areia: 229 212 193;          /* #E5D4C1 - fundos quentes secundários */
+    --sos-papel: 242 230 216;          /* #F2E6D8 - papel amassado do modal */
+    --sos-papel-claro: 248 240 230;    /* #F8F0E6 - folha de caderno e cards */
 
-    /* --- Rosa --- */
-    --sos-rosa: 224 129 142;         /* #E0818E - hover, destaques, aquarela */
+    /* --- Identidade Principal (Ameixa / Roxo da Logo) --- */
+    --sos-roxo: 104 68 83;             /* #684453 - cor principal da marca (faixas, cards e CTAs) */
+    --sos-lilas-forte: 118 78 95;      /* #764E5F - cabeçalho e destaque do título */
+    --sos-azul-escuro: 77 48 60;       /* #4D303C - ameixa profundo (substitui o azul marinho no hover e container de apoio) */
 
-    /* --- Marrons --- */
-    --sos-marrom: 118 53 43;         /* #76352B - textos e botões principais */
-    --sos-marrom-medio: 82 49 46;    /* #52312E - parágrafos */
-    --sos-marrom-escuro: 57 40 44;   /* #39282C - títulos e rodapé */
+    /* --- Tipografia e Neutros Escuros (Vinho Carvão) --- */
+    --sos-marrom: 104 68 83;           /* #684453 - botões e ações principais */
+    --sos-marrom-medio: 94 73 82;      /* #5E4952 - malva escuro para parágrafos */
+    --sos-marrom-escuro: 51 34 41;     /* #332229 - vinho carvão para títulos e rodapé */
 
-    /* --- Amarelo --- */
-    --sos-amarelo: 249 223 142;      /* #F9DF8E */
-    --sos-bege: 223 201 172;         /* #DFC9AC - letras sobre o roxo */
-    --sos-amarelo-claro: 253 241 205;/* #FDF1CD - amarelo lavado */
+    /* --- Acentos Acolhedores e de Alerta --- */
+    --sos-rosa: 217 123 136;           /* #D97B88 - rosa queimado (hover, selos e pauta) */
+    --sos-laranja: 217 123 136;        /* #D97B88 - detalhes de destaque */
+    --sos-amarelo: 245 201 107;        /* #F5C96B - âmbar solar (botão Saída Rápida e alertas) */
+    --sos-amarelo-claro: 252 238 202;  /* #FCEECA - detalhe circular do banner de saída */
+    --sos-bege: 231 208 179;           /* #E7D0B3 - textos sobre o roxo */
 
-    /* --- Azul (desfoque atrás do abraço e card da rede de apoio) --- */
-    --sos-azul: 156 183 211;         /* #9CB7D3 */
-    --sos-azul-claro: 214 227 240;   /* #D6E3F0 - card dos pontos de apoio */
-    --sos-azul-escuro: 41 51 69;   /* #293345 rgb( 41, 51, 69)*/
+    /* --- Azul Névoa (apenas aura do abraço e aquarela) --- */
+    --sos-azul: 184 201 217;           /* #B8C9D9 - azul névoa dessaturado */
+    --sos-azul-claro: 218 228 237;     /* #DAE4ED - azul névoa claro */
 
-    /* --- Roxo --- */
-    --sos-roxo: 104 68 83;           /* #684453 */
+    /* --- Vínculos Semânticos --- */
+    --sos-uva: 104 68 83;              /* #684453 - unificado com a cor da marca */
+    --sos-uva-escuro: 77 48 60;        /* #4D303C - hover */
+    --sos-branco-quente: 248 240 230;  /* #F8F0E6 - papel dos cartões */
+    --sos-escuro: 51 34 41;            /* #332229 - títulos */
+    --sos-texto: 94 73 82;             /* #5E4952 - parágrafos */
+    --sos-borda: 205 186 168;          /* #CDBAA8 - bordas suaves */
+    --sos-divisor: 216 199 183;        /* #D8C7B7 - divisórias */
+    --sos-input-borda: 196 175 156;    /* #C4AF9C - borda dos inputs */
 
-    /* --- Apelidos usados pelos nomes antigos do Tailwind/HTML --- */
-    --sos-laranja: 224 129 142;      /* detalhes de destaque = rosa */
-    --sos-uva: 118 53 43;            /* cor principal de texto/links */ /*mas não é uva??? é marrom, mudança 118 53 43 */
-    --sos-uva-escuro: 82 49 46;      /* hover */
+    /* --- Fundos Suaves das Seções --- */
+    --sos-chip: 239 218 214;           /* #EFDAD6 - selo "acolhimento" */
+    --sos-card-rosa: 240 214 212;      /* #F0D6D4 - card 01 */
+    --sos-card-azul: 221 230 237;      /* #DDE6ED - card 02 */
+    --sos-card-amarelo: 247 232 198;   /* #F7E8C6 - card 03 */
+    --sos-pessego: 240 218 210;        /* #F0DAD2 - chamada final */
 
-    /* --- Neutros --- */
-    --sos-branco-quente: 246 236 219;/* papel dos cartões */
-    --sos-escuro: 57 40 44;          /* títulos */
-    --sos-texto: 82 49 46;           /* parágrafos */
-    --sos-borda: 188 161 132;        /* bordas */
-    --sos-divisor: 199 174 146;      /* divisórias */
-    --sos-input-borda: 199 174 146;  /* borda dos campos */
-
-    /* --- Fundos suaves das seções --- */
-    --sos-chip: 234 205 186;         /* selo "acolhimento" */
-    --sos-card-rosa: 236 195 187;    /* card 01 */
-    --sos-card-azul: 202 214 227;    /* card 02 */
-    --sos-card-amarelo: 244 223 179; /* card 03 */
-    --sos-lilas-forte: 124 84 99;    /* forma interna */
-    --sos-pessego: 236 205 186;      /* chamada final */
-
-    /* --- Rodapé (fundo escuro) --- */
-    --sos-divisor-escuro: 92 70 66;
-    --sos-footer-texto: 231 208 179;
-    --sos-footer-fraco: 199 174 146;
+    /* --- Rodapé (fundo vinho carvão) --- */
+    --sos-divisor-escuro: 84 58 68;    /* #543A44 */
+    --sos-footer-texto: 231 208 179;   /* #E7D0B3 */
+    --sos-footer-fraco: 189 167 150;   /* #BDA796 */
 }
 
 /* ---------- 1. BASE ---------- */
